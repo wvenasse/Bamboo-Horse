@@ -1,0 +1,255 @@
+@import './variables';
+
+//重置样式
+* {
+    box-sizing: border-box;
+    outline: none;//不要高亮
+}
+//所有元素以边框为准
+html{
+    font-size: 1rem;
+}
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.2em;
+    background: rgba($color: #ffc0cb, $alpha: 0.65);
+    -webkit-font-smoothing:antialiased;
+   
+}
+
+html,body{ 
+    margin:0;
+    padding:0;
+    height:100%; 
+    width:100%; 
+}
+
+#app{
+    height: 100%;
+}
+
+a{
+    color: #999;
+}
+p {
+    line-height: 1.5em;
+  }
+
+//定义颜色 colors
+
+@each $colorKey,$color in $colors {
+    .text-#{$colorKey}{
+        color: $color;
+    }
+    .bg-#{$colorKey}{
+        background-color: $color;
+    }
+}
+//text 文本
+@each $var in (left,center,right) {
+    .text-#{$var}{
+        text-align: $var !important;
+    }
+}
+//font size 文本大小
+
+ @each $sizekey,$size in $font-sizes {
+     .fs-#{$sizekey}{
+         font-size: $size * $base-font-size;
+     }
+ }
+
+// text overflow 文本超出一行
+.text-ellipsis {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+// width, height
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
+
+ //flex
+ .d-flex{
+     display: flex;
+ }
+ .flex-column{
+     flex-direction: column;
+ }
+ .flex-warp{
+     flex-wrap:wrap;
+ }
+ 
+ @each $key,$value in $flex-jc {
+     .jc-#{$key}{
+         justify-content: $value ;
+     }
+ }
+
+ @each $key,$value in $flex-ai {
+     .ai-#{$key}{
+         align-items: $value ;
+     }
+ }
+ .flex-1{
+     flex:1;
+ }
+ .flex-grow-1{
+     flex-grow: 1;
+ }
+
+ //spacing 边距
+ // .mt-1 => margin-top level1 .pd-2=>padding lv2
+
+// .m-1=>{margin-top:0.23rem
+@each $typekey,$type in $spacing-types {
+    @each $sizekey,$size in $spacing-sizes {
+        .#{$typekey}-#{$sizekey}{
+            #{$type}:$size * $spacing-base-size;
+        }
+    }
+
+//mx-1 =>{maring-left&&margin-right:1}
+    @each $sizekey,$size in $spacing-sizes {
+        .#{$typekey}x-#{$sizekey}{
+            #{$type}-left:$size * $spacing-base-size;
+            #{$type}-right:$size * $spacing-base-size;
+        }
+    }
+//my-1 =>{maring-top&&margin-bottom:1}
+    @each $sizekey,$size in $spacing-sizes {
+        .#{$typekey}y-#{$sizekey}{
+            #{$type}-top:$size * $spacing-base-size;
+            #{$type}-bottom:$size * $spacing-base-size;
+        }
+    }
+
+
+     @each $directionkey,$direction in $spacing-directions {
+         @each $sizekey,$size in $spacing-sizes {
+            //.mt-1
+            .#{$typekey}#{$directionkey}-#{$sizekey}{
+                #{$type}-#{$direction}:$size*$spacing-base-size;
+            }
+
+        }
+    }
+ }
+ //button
+ .btn{
+     border: none;
+     border-radius: 0.1538rem;
+     font-size:map-get($font-sizes,'sm');
+     padding: 0.2rem 0.6rem;
+     &.btn-lg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i {
+          color: map-get($colors, 'pink-3');
+          font-weight: bold;
+          font-size: 1.5rem;
+          margin-right: 0.5rem;
+        }
+        background: map-get($colors, 'white-1');
+        border: 1px solid map-get($colors, 'white-2');
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+        border-radius: 10%;
+      }
+ }
+
+ //nav
+ //&表示同一级元素
+ .nav {
+    display: flex;
+    .nav-item {
+      border-bottom: 3px solid transparent;
+      padding-bottom: 0.2rem;
+      &.active {
+        color: map-get($colors, 'pink-1');
+        border-bottom-color: map-get($colors, 'pink-3');
+      }
+    }
+    &.nav-inverse {
+      .nav-item {
+        color: map-get($colors, 'white');
+        &.active {
+          border-bottom-color: map-get($colors, 'white');
+        }
+      }
+    }
+    
+  }
+ //sprite
+ .sprite{
+     background:url(../../images/index.png) no-repeat 0 0;
+     background-size: 28.846154rem;
+     display: inline-block;
+     &.sprite-person{
+        height: 1.538462rem;
+        width: 1.769231rem;
+        background-position: 63.546% 15.517%;
+     }
+     &.sprite-story{
+        height: 1.538462rem;
+        width:  1.769231rem;
+        background-position: 90.483% 15.614%;
+     }
+     &.sprite-hot{
+        height: 1.538462rem;
+        width:  2.069231rem;
+        background-position: 36.467% 15.287%;
+     }
+     &.sprite-discover{
+        height: 1.538462rem;
+        width:  1.769231rem;
+        background-position: 89.733% 1.266%;
+     }
+     &.sprite-video{
+        height: 1.538462rem;
+        width:  2.023077rem;
+        background-position: 9.50% 1.266%;
+     }
+     &.sprite-arrow{
+        width: 0.76rem;
+        height: 0.76rem;
+        background-position: 38.577% 52.076%;
+     }
+     &.sprite-news{
+        width: .999231rem;
+        height: .999231rem;
+        background-position: 0.138% 50.452%;
+     }
+    
+ }
+
+ // borders
+@each $dir in (top, right, bottom, left) {
+    .border-#{$dir} {
+      border-#{$dir}: 1px solid $border-color;
+    }
+  }
+
+  .header{
+    // position:absolute;
+    // left:0;
+    // top:0;
+    width:100%;
+    // z-index:999;
+    height: auto;
+    background:pink; 
+  }
+  
+  .footer{
+    position: sticky;
+    bottom: 0;
+    z-index: 999;
+  }
